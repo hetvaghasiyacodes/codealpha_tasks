@@ -42,4 +42,8 @@ Clone this repository:
 ```bash
 git clone https://github.com/hetvaghasiyacodes/codealpha_tasks.git
 cd codealpha_tasks
+ls     # (Linux/Mac) ya dir (Windows) → folder me kya files hai dekhne ke liye
+python3 filename.py
+python3 scanner.py -u https://example.com --scan xss
+
 
