@@ -1,12 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/hetvaghasiyacodes/codealpha_tasks/main/assets/codealpha_logo.svg" alt="CodeAlpha Logo" width="600"/>
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/hetvaghasiyacodes/codealpha_tasks/main/assets/banner.png" alt="CodeAlpha Tasks Banner" width="800"/>
-</p>
 
-<h1 align="center">🚀 CodeAlpha Tasks</h1>
-<p align="center">
   Beginner-friendly yet powerful security & automation toolkit 🔍🛡  
 </p>
 
