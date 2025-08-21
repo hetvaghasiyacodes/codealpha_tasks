@@ -62,4 +62,39 @@ ls     # (Linux/Mac) ya dir (Windows) → folder me kya files hai dekhne ke liye
 python3 filename.py
 python3 scanner.py -u https://example.com --scan xss
 
+## 🔑 Included Tools
+
+This repository currently includes the following tools:
+
+- **scanner.py** → Basic vulnerability scanner (XSS, SQLi)
+- **scanner_final.py** → Advanced & color-coded scanner with improved visibility and reporting
+
+
+### ⚙️ Usage
+
+```bash
+python scanner_final.py -u testphp.vulnweb.com --scan all
+python scanner_final.py -u testphp.vulnweb.com --scan xss
+python scanner_final.py -u testphp.vulnweb.com --scan sqli
+
+
+
+
+## 🚀 Future Updates / Roadmap
+
+This project is under active development.  
+Expect new features, improvements, and advanced modules in future versions:
+
+- 🔄 Version upgrades & better CLI options
+- 🛡️ Advanced vulnerability scanning (WAF bypass, Blind SQLi, RCE, etc.)
+- 📑 Export reports (JSON, HTML, PDF)
+- 🎨 Better colored output & detailed logs
+- ⚡ Performance improvements & multi-threading
+- 🔧 Custom payloads, wordlists & config files
+- 🌐 Support for more vulnerability types in future releases
+
+> ⚠️ Note: This is an evolving project.  
+> New updates, versions, and advanced features will be added from time to time. Stay tuned! 
+
+
 
