@@ -62,7 +62,9 @@ ls     # (Linux/Mac) ya dir (Windows) → folder me kya files hai dekhne ke liye
 python3 filename.py
 python3 scanner.py -u https://example.com --scan xss
 
-## 🔑 Included Tools
+---
+
+##🔑 Included Tools
 
 This repository currently includes the following tools:
 
