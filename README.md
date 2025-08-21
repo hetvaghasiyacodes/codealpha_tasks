@@ -1,1 +1,1 @@
-# codealpha_tasks
+Updated README.md with professional project details
