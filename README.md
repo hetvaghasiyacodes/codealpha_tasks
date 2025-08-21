@@ -1,3 +1,24 @@
+<pre>
+   ____          _      _    _ _       _       
+  / ___|___   __| | ___| | _(_) |_ ___| |__    
+ | |   / _ \ / _` |/ _ \ |/ / | __/ __| '_ \   
+ | |__| (_) | (_| |  __/   <| | || (__| | | |  
+  \____\___/ \__,_|\___|_|\_\_|\__\___|_| |_|  
+                                              
+        _   _      _   _                              
+       | | | | ___| |_| |__   ___  _ __   ___ _ __    
+       | |_| |/ _ \ __| '_ \ / _ \| '_ \ / _ \ '__|   
+       |  _  |  __/ |_| | | | (_) | | | |  __/ |      
+       |_| |_|\___|\__|_| |_|\___/|_| |_|\___|_|      
+
+</pre>
+
+# Code Alpha - Het Vaghasiya 🚀
+
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Version](https://img.shields.io/badge/version-1.0-blue)
+![License](https://img.shields.io/badge/license-MIT-orange)
+![Python](https://img.shields.io/badge/python-3.11-blueviolet)
 
   Beginner-friendly yet powerful security & automation toolkit 🔍🛡  
 </p>
