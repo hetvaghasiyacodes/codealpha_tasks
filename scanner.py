@@ -40,13 +40,32 @@ def get_session(use_tor=False, random_agent=False):
     headers = {}
     if random_agent:
         headers['User-Agent'] = random.choice(USER_AGENTS)
+    session.headers.update(headers)
+    
     if use_tor:
         session.proxies = {
             "http": "socks5h://127.0.0.1:9050",
             "https": "socks5h://127.0.0.1:9050"
         }
-    session.headers.update(headers)
+        try:
+            r = session.get("http://httpbin.org/ip", timeout=10)
+            print(Fore.CYAN + f"[INFO] Tor IP: {r.json()['origin']}" + Style.RESET_ALL)
+        except Exception:
+            print(Fore.YELLOW + "[WARNING] Tor not reachable, falling back to normal connection." + Style.RESET_ALL)
+            session.proxies = {}
     return session
+
+# Safe GET request with retries
+def safe_get(session, url, delay=0, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            r = session.get(url, timeout=15)
+            time.sleep(delay)
+            return r
+        except Exception as e:
+            print(Fore.RED + f"[ERROR] {e} (Attempt {attempt+1}/{max_retries})" + Style.RESET_ALL)
+            time.sleep(2)
+    return None
 
 # Scan function for XSS
 def scan_xss(url, payloads, session, waf=False, delay=0):
@@ -61,15 +80,12 @@ def scan_xss(url, payloads, session, waf=False, delay=0):
             test_params[param] = payload
             new_query = urllib.parse.urlencode(test_params, doseq=True)
             test_url = urllib.parse.urlunparse(parsed._replace(query=new_query))
-            try:
-                r = session.get(test_url, timeout=15)
-                if payload in r.text:
-                    vuln_found = True
-                    print(f"{Fore.GREEN}[VULNERABLE] XSS found with payload: {payload}{Style.RESET_ALL}")
-                    print(f"{Fore.MAGENTA}[PoC URL] {test_url}{Style.RESET_ALL}")
-                time.sleep(delay)
-            except Exception as e:
-                print(f"{Fore.RED}[ERROR] {e}{Style.RESET_ALL}")
+            r = safe_get(session, test_url, delay)
+            if r and payload in r.text:
+                vuln_found = True
+                print(f"{Fore.GREEN}[VULNERABLE] XSS found with payload: {payload}{Style.RESET_ALL}")
+                print(f"{Fore.MAGENTA}[PoC URL] {test_url}{Style.RESET_ALL}")
+
     if not vuln_found:
         print(f"{Fore.YELLOW}[INFO] No XSS vulnerabilities found.{Style.RESET_ALL}")
 
@@ -86,17 +102,14 @@ def scan_sqli(url, payloads, session, waf=False, delay=0):
             test_params[param] = payload
             new_query = urllib.parse.urlencode(test_params, doseq=True)
             test_url = urllib.parse.urlunparse(parsed._replace(query=new_query))
-            try:
-                r = session.get(test_url, timeout=15)
-                if any(err in r.text.lower() for err in ["mysql", "syntax", "error"]):
-                    vuln_found = True
-                    backend_info = r.headers.get("Server", "Unknown Backend")
-                    print(f"{Fore.GREEN}[VULNERABLE] SQLi found with payload: {payload}{Style.RESET_ALL}")
-                    print(f"{Fore.MAGENTA}[PoC URL] {test_url}{Style.RESET_ALL}")
-                    print(f"{Fore.CYAN}[Backend] {backend_info}{Style.RESET_ALL}")
-                time.sleep(delay)
-            except Exception as e:
-                print(f"{Fore.RED}[ERROR] {e}{Style.RESET_ALL}")
+            r = safe_get(session, test_url, delay)
+            if r and any(err in r.text.lower() for err in ["mysql", "syntax", "error"]):
+                vuln_found = True
+                backend_info = r.headers.get("Server", "Unknown Backend")
+                print(f"{Fore.GREEN}[VULNERABLE] SQLi found with payload: {payload}{Style.RESET_ALL}")
+                print(f"{Fore.MAGENTA}[PoC URL] {test_url}{Style.RESET_ALL}")
+                print(f"{Fore.CYAN}[Backend] {backend_info}{Style.RESET_ALL}")
+
     if not vuln_found:
         print(f"{Fore.YELLOW}[INFO] No SQLi vulnerabilities found.{Style.RESET_ALL}")
 
